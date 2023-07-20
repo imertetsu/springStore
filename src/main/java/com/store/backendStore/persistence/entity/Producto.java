@@ -3,6 +3,7 @@ package com.store.backendStore.persistence.entity;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @Entity
 @Table(name = "productos") //estamos hablando de la tabla productos
@@ -11,23 +12,36 @@ public class Producto {
     @GeneratedValue(strategy = GenerationType.IDENTITY) //java general el valor
     @Column(name = "id_producto")//esto va en la tabla
     private Integer idProduct;
-
     private String nombre;
-
     @Column(name = "id_categoria")
     private Integer idCategoria;
-
     @Column(name = "codigo_barras")
     private String codigoBarras;
-
     @Column(name = "precio_venta")
     private BigDecimal precioVenta;
-
     @Column(name = "cantidad_stock")
     private Integer cantidadStock;
-
     private Boolean estado;
 
+    @ManyToOne
+    @JoinColumn(name = "id_categoria", insertable = false, updatable = false)
+    private Categoria categoria;
+
+    @OneToMany(mappedBy = "producto")
+    private List<ComprasProducto> comprasProductoList;
+
+    public Categoria getCategoria() {
+        return categoria;
+    }
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
+    }
+    public List<ComprasProducto> getComprasProductoList() {
+        return comprasProductoList;
+    }
+    public void setComprasProductoList(List<ComprasProducto> comprasProductoList) {
+        this.comprasProductoList = comprasProductoList;
+    }
     public Integer getIdProduct() {
         return idProduct;
     }
