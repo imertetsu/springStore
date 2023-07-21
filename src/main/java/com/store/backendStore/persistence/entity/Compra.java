@@ -12,13 +12,10 @@ public class Compra {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_compra")
     private Integer idCompra;
-
     @Column(name = "id_cliente")
     private String idCliente;
-
     @Column(name = "fecha")
     private LocalDateTime fecha;
-
     @Column(name = "medio_pago")
     private String medioPago;
     private String comentario;
@@ -28,7 +25,7 @@ public class Compra {
     @JoinColumn(name = "id_cliente", insertable = false, updatable = false)
     private Cliente cliente;
 
-    @OneToMany(mappedBy = "compra")
+    @OneToMany(mappedBy = "compra", cascade = {CascadeType.ALL})
     private List<ComprasProducto> comprasProductoList;
 
     public Integer getIdCompra() {
@@ -77,6 +74,22 @@ public class Compra {
 
     public void setEstado(String estado) {
         this.estado = estado;
+    }
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
+
+    public List<ComprasProducto> getComprasProductoList() {
+        return comprasProductoList;
+    }
+
+    public void setComprasProductoList(List<ComprasProducto> comprasProductoList) {
+        this.comprasProductoList = comprasProductoList;
     }
 
     @Override

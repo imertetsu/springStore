@@ -24,7 +24,7 @@ public class Producto {
     private Boolean estado;
 
     @ManyToOne
-    @JoinColumn(name = "id_categoria", insertable = false, updatable = false)
+    @JoinColumn(name = "id_categoria", insertable = false, updatable = false)//id_categoria es viene de los atributos de la tabla categories
     private Categoria categoria;
 
     @OneToMany(mappedBy = "producto")
